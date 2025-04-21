@@ -1,0 +1,81 @@
+<section class="mt-5 py-4">
+    <div class="w-75 mx-auto bg-main-light my-2 mt-5 py-3 shadow p-2 mt-5 pt4">
+
+        <div class="container">
+
+            <h1 class="text-main fw-bold">Shipping Address:</h1>
+
+            <form [formGroup]="checkoutForm" (ngSubmit)="payment()" class="my-3">
+
+                <div class="detail-input">
+                    <label for="details">Deatials:</label>
+                <textarea [ngClass]="{
+                    'is-valid':!checkoutForm.get('details')?.errors && (checkoutForm.get('details')?.touched || checkoutForm.get('details')?.dirty),
+                    'is-invalid':checkoutForm.get('details')?.errors && (checkoutForm.get('details')?.touched || checkoutForm.get('details')?.dirty)
+                }" formControlName="details" id="details" class="form-control"></textarea>
+                </div>
+                @if(checkoutForm.get('details')?.errors && checkoutForm.get('details')?.touched ){
+                    <div class="alert alert-warning fs-6 fw-bold rounded-2 my-2 p-2">
+    
+                        @if (checkoutForm.get('details')?.getError('required'))
+                        {
+                            <p class="m-0">details Is Required</p>
+                        }
+                       
+                           
+                      
+                    </div>
+                }
+
+                <div class="phone-input my-3">
+                    <label for="phone" >Phone:</label>
+                    <input  [ngClass]="{
+                        'is-valid':!checkoutForm.get('phone')?.errors && (checkoutForm.get('phone')?.touched || checkoutForm.get('phone')?.dirty),
+                        'is-invalid':checkoutForm.get('phone')?.errors && (checkoutForm.get('phone')?.touched || checkoutForm.get('phone')?.dirty)
+                    }" type="tel" formControlName="phone" placeholder="phone" class="form-control">
+
+                </div>
+                @if(checkoutForm.get('phone')?.errors && checkoutForm.get('phone')?.touched ){
+                    <div class="alert alert-warning fs-6 fw-bold rounded-2 my-2 p-2">
+    
+                        @if (checkoutForm.get('phone')?.getError('required'))
+                        {
+                            <p class="m-0">Phone Is Required</p>
+                        }
+                        @else if (checkoutForm.get('phone')?.getError('pattern')) 
+                        {
+                            <p class="m-0">Phone Must Be Egyption</p>
+                        }
+                           
+                      
+                    </div>
+                }
+
+                <div class="city-input">
+                    <label for="city">City</label>
+                <input [ngClass]="{
+                    'is-valid':!checkoutForm.get('city')?.errors && (checkoutForm.get('city')?.touched || checkoutForm.get('city')?.dirty),
+                    'is-invalid':checkoutForm.get('city')?.errors && (checkoutForm.get('city')?.touched || checkoutForm.get('city')?.dirty)
+                }" type="text" formControlName="city" placeholder="city" class="form-control">
+                </div>
+                @if(checkoutForm.get('city')?.errors && checkoutForm.get('city')?.touched){
+                    <div class="alert alert-warning fs-6 fw-bold rounded-2 my-2 p-2">
+                        @if(checkoutForm.get('city')?.getError('required'))
+                        {
+                            <p>city is required</p>
+                        }
+                        @else if (checkoutForm.get('city')?.getError('minlength')) {
+                            <p>city atleast 3 characters</p>
+                        }
+                       
+                    </div>
+                }
+
+                <button class="btn-main d-block mx-auto w-50 my-3">Payment</button>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>

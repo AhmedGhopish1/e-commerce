@@ -1,0 +1,32 @@
+<section class="categ mt-5 pt-4">
+   <div class="container mt-3">
+    <div class="row">
+        @for (category of categoryRes; track category._id) {
+             <div class="col-12 col-md-4 p-2 cursor-pointer" > 
+            <div class="card product">
+                <div class="img" [routerLink]="['/catDetail', category._id]">
+                    <img [src]="category.image" [alt]="category.name" class="w-100 object-fit-cover" style="height: 300px;">
+                </div>
+                <div class="card-body">
+                    <h1 class="text-main fs-3 text-center fw-bold">{{category.name}}</h1>
+                </div>
+                
+            </div>
+            </div>
+        }
+
+        <!-- <div class="text-center my-3">
+            <h2 class="text-main fw-semibold">SuperMarket subcategories</h2>
+        </div>
+
+       @for (catName of categoryRes; track catName._id) {
+        <div class="col-md-4 py-2">
+            <div class="catName product text-center p-3">
+                <h3 class="fw-bold">{{catName.name}}</h3>
+            </div>
+        </div>
+       } -->
+
+    </div>
+   </div>
+</section>

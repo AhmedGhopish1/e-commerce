@@ -1,0 +1,61 @@
+@if(productRes){
+    <section class="mt-5 pt-4">
+
+        <h1 class="text-center fw-bold fs-1 mt-4">All Products</h1>
+    
+        <div class="search w-75 mx-auto m-5 p-3">
+            
+            <input [(ngModel)]="searchInput" type="search" name="search" placeholder="What are you looking for" class="form-control ">
+        </div>
+        
+        <div class="container">
+            <div class="row">
+               @for (product of productRes | search : searchInput ; track product._id) {
+    
+                <div class="col-md-6 col-lg-3 p-3">
+                    <div class="">
+                        <div class="pro px-3 rounded-2 cursor-pointer" >
+                           <div class="img-caption" [routerLink]="['/Details', product._id ]">
+                            <div class="product-img ">
+                                <img [src]="product.imageCover" [alt]="product.category.name" class="w-100 rounded">
+                            </div>
+                           <div class="product-caption">
+                               <h2 class="small text-main fw-semibold">{{product.category.name}}</h2>
+                               <h1 class="small fw-semibold">{{product.title.split(' ').slice(0,2).join()}}</h1>
+                               <div class="foot d-flex justify-content-between">
+                                   <p class="price fw-semibold">{{product.price}}EGp</p>
+                                   
+                                       
+                                      <div>
+                                         <span class="rate small fw-semibold"><i class="fa-solid fa-star rating-color"></i>{{product.ratingsAverage}}</span>                           
+                                      </div>  
+                               </div>
+                           </div>
+    
+                         </div>
+                         
+                           
+                            @if(wishlistData){
+                                
+                                @if(check(product._id))
+                                {<span (click)="removeItem(product._id)" ><i  class="fa-solid fa-heart fs-2 cursor-pointer text-danger"></i></span>}
+                                @else {
+                                <span (click)="addToWishList(product._id)" ><i  class="fa-solid fa-heart fs-2 cursor-pointer"></i></span>
+                                    
+                                }
+                            
+                            }
+                       
+                           
+                            <button (click)="addToCart(product._id)" class="button btn-main w-75 mx-auto d-block">+Add</button>
+        
+                        </div>
+                    </div>
+    
+                </div>
+               }
+            </div>
+        </div>
+    
+    </section>
+}

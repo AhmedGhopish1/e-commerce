@@ -1,0 +1,23 @@
+<section class="mt-5 pt-2">
+
+    <div class="container">
+
+        <form [formGroup]="verifyCodeForm" (ngSubmit)="verifyCode()">
+            <label for="resetCode" class="fs-2 fw-bold mb-2">Please Enter Reset Code to Verify :</label>
+            <input formControlName="resetCode" type="resetCode" placeholder="resetCode" class="form-control p-3">
+
+              @if(errorCode)
+              {
+                <p class="fs-6 fw-bold background-err mt-2 p-4 rounded-3">{{errmessage}}</p>
+              }
+              
+
+              <button class="btn border-2 border-success mt-3 ms-1 px-3 fs-6 fw-semibold">Verify</button>
+            
+        </form>
+
+       
+
+    </div>
+
+</section>

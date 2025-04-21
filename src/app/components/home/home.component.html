@@ -1,0 +1,100 @@
+    
+   <section class="mt-5 pt-4">
+    <div class="container-fluid">
+        <div class="row g-0">
+            <div class="col-md-10">
+                <owl-carousel-o [options]="mainSlider">
+                    <ng-template carouselSlide>
+                        <img src="./assets/images/slider-image-3.jpeg" alt="" class="w-100" height="400px">
+                    </ng-template>  
+                    <ng-template carouselSlide>
+                        <img src="./assets/images/slider-image-2.jpeg" alt="" class="w-100" height="400px">
+                    </ng-template>  
+                    <ng-template carouselSlide>
+                        <img src="./assets/images/slider-image-1.jpeg" alt="" class="w-100" height="400px">
+                    </ng-template>  
+                  </owl-carousel-o>
+                
+            </div>
+            <div class="col-md-2">
+                <img src="./assets/images/slider-image-1.jpeg" alt="" class="w-100" height="200px">
+                <img src="./assets/images/slider-image-2.jpeg" alt="" class="w-100" height="200px">
+            </div>
+        </div>
+    </div>
+   </section>
+
+
+    <section class="my-2">
+        <owl-carousel-o [options]="categorySlider">
+
+            @for (category of categoryData; track category._id) {
+                <ng-template carouselSlide >
+                    <img [src]="category.image" [alt]="category.name" class="w-100" height="200px">
+                  </ng-template>
+            }
+        
+          </owl-carousel-o>
+    </section>
+
+    <section class=" my-3">
+        <!-- <h1 class="text-center fw-bold p-2 bg-body-tertiary border-5 border-success mx-auto w-25">Popular Products</h1> -->
+
+        <div class="search w-75 mx-auto m-5 p-3">
+            
+            <input [(ngModel)]="searchInputValue" type="search" name="search" placeholder="What are you looking for" class="form-control ">
+        </div>
+
+        <div class="container">
+            <div class="row">
+                @for(product of productsData | search : searchInputValue ;track product._id){
+                 <div class=" col-md-6 col-lg-3 p-2">
+                     <div class="product px-2 rounded-2 cursor-pointer position-relative">
+
+                       <div class="wish-heart position-absolute">
+                        @if(wishlistData){
+                                
+                            @if(check(product._id))
+                            {<span (click)="removeItem(product._id)" ><i  class="fa-solid fa-heart fs-2 cursor-pointer text-danger"></i></span>}
+                            @else {
+                            <span (click)="addToWishList(product._id)" ><i  class="fa-solid fa-heart fs-2 cursor-pointer"></i></span>
+                                
+                            }
+                        
+                        }
+                       </div>
+
+                         <div class="container-img&caption" [routerLink]="['/Details',product._id]">
+                            <div class="product-img ">
+                                <img [src]="product.imageCover" alt="" class="w-100 rounded">
+                            </div>
+                           <div class="product-caption">
+                               <h2 class="fs-5 text-main">{{product.category.name}}</h2>
+                               
+                               <h1 class="fs-6 fw-semibold">{{product.title.split(' ')|slice:0:2}}</h1>
+                               <div class="foot d-flex justify-content-between">
+                                   <p class="price small fw-bold">{{product.price}} Egp</p>
+                                   
+                                       
+                                      <div>
+                                       @for (star of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index) {
+                                           <span class="rate fs-6"><i class="fa-solid fa-star rating-color small"></i></span>
+                                       }
+                                       @if (product.ratingsAverage%1!=0) {
+                                           <i class="fa-solid fa-star-half-stroke rating-color small"></i> 
+                                       }
+                                       <span>{{product.ratingsAverage}}</span>
+                                      </div>
+                                  
+                               </div>
+                           </div>
+                         </div>
+                        
+                        <button (click)="addToCart(product._id)" class="btn-main w-100">Add to cart</button>
+                     </div>
+
+                 </div>
+                }
+             </div>
+        </div>
+    </section>

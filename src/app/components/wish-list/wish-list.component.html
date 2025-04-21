@@ -1,0 +1,38 @@
+@if (wishListData) {
+    <section class="mt-5 pt-4">
+        <div class="container py-5 my-4 bg-main-light my-5">
+            <h1 class="fw-bold ps-3 fs-2">My wish List </h1>
+
+            @for (item of wishListData; track item._id) {
+                <div class="row align-items-center  mx-auto py-3 border-bottom border-2">
+                    <div class="col-md-2 p-2 ">
+                        <div class="ps-3 cursor-pointer" [routerLink]="['/Details',item._id]">
+                           <img [src]="item.imageCover" class="w-100" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-4 ps-4 ">
+                        
+                        <div class="d-details">
+                            <p class="fs-5 fw-bold ">{{item.title}}</p>
+    
+                           <p class="price small fw-bold">{{item.price}} Egp</p>
+                     
+                           <span (click)="removeItem(item._id)" class="fw-bold cursor-pointer text-danger"><i class="fa-solid fa-trash-can "></i>Remove</span>
+
+                            
+                        </div>
+        
+                    </div>
+                    <div class="col-md-2 ps-4 ms-auto">
+                        <div class="dd">
+                            <button (click)="addToCart(item._id)" class="btn border-1 border-success px-3 py-2 fw-bold d-block mx-auto small">add To Cart</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    
+    </section>
+    
+}

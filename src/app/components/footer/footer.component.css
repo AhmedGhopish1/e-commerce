@@ -1,0 +1,23 @@
+.footer {
+    background-color: #f1f4f3;
+    padding: 40px 20px;
+  }
+  .payment-logos img,
+  .store-logos img {
+    max-height: 30px;
+    margin-right: 10px;
+  }
+  .email-input {
+    max-width: 500px;
+  }
+  @media (max-width: 576px) {
+    .store-logos, .payment-logos {
+      justify-content: center;
+      margin-top: 15px;
+    }
+  }
+
+  div.pay-ways img
+  {
+    width: 15%;
+  }

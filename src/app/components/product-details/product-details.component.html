@@ -1,0 +1,61 @@
+@if (productDetails) {
+    <section class="mt-5 pt-4">
+        <div class="container py-4 my-3">
+            <div class="row align-items-center">
+                <div class="col-md-3 p-2 ">
+                    <div>
+                        <owl-carousel-o [options]="customOptions">
+                        @for (image of productDetails.images; track $index) {
+                            <ng-template carouselSlide >
+                                <img [src]="image" class="w-100">
+                              </ng-template>
+                        }
+                         
+                    </owl-carousel-o>
+                    </div>
+                </div>
+                <div class="col-md-9 ">
+                    <div class="d-details">
+
+                      <div class="top d-flex justify-content-between">
+                        <p>{{productDetails.description}}</p>
+                        <div class="wish-heart">
+                            @if(wishlistData){
+                                    
+                                @if(check(productDetails._id))
+                                {<span (click)="removeItem(productDetails._id)" ><i  class="fa-solid fa-heart fs-2 cursor-pointer text-danger"></i></span>}
+                                @else {
+                                <span (click)="addToWishList(productDetails._id)" ><i  class="fa-solid fa-heart fs-2 cursor-pointer"></i></span>
+                                    
+                                }
+                            
+                            }
+                           </div>
+                      </div>
+                        <h2 class="fs-6 fw-bold ">{{productDetails.title}}</h2>
+                        <h2 class="fw-bold text-main">{{productDetails.category.name}}</h2>
+                        <div class="foot d-flex justify-content-between">
+                            <p class="price small fw-bold">{{productDetails.price}} Egp</p>
+                            
+                                
+                               <div>
+                                @for (star of [1,2,3,4,5].slice(0,productDetails.ratingsAverage); track $index) {
+                                    <span class="rate fs-6"><i class="fa-solid fa-star rating-color small"></i></span>
+                                }
+                                @if (productDetails.ratingsAverage%1!=0) {
+                                    <i class="fa-solid fa-star-half-stroke rating-color small"></i> 
+                                }
+                                <span>{{productDetails.ratingsAverage}}</span>
+                               </div>
+                           
+                        </div>
+                        <button (click)="addToCart(productDetails._id)" class="btn-main w-100">Add To Cart</button>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    
+}

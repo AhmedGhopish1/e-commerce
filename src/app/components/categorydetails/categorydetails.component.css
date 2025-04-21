@@ -1,0 +1,5 @@
+div.cat:hover img{
+    scale: 1.7;
+    transition: scale 1.2s;
+    
+}

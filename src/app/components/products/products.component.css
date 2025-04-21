@@ -1,0 +1,27 @@
+div.pro
+{
+    transition: box-shadow 0.4s;
+}
+div.pro:hover
+{
+    box-shadow: 0 0 10px #089608c7;
+
+}
+div.pro:hover button
+{
+    transform: translateY(-50%);
+    opacity: 1;
+    transition: transform 0.5s;
+    
+}
+
+button{
+
+    transform: translatey(600%);
+    opacity: 0;
+}
+
+i.fa-heart
+{
+    margin-left: 88%;
+}

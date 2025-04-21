@@ -1,0 +1,63 @@
+@if(cartData){
+    <section class="mt-5 pt-4">
+
+        <div class=" mx-auto ps-3 ">
+            
+            
+    
+            <div class="container  bg-main-light my-5 shadow p-2">
+                <div class="head d-flex justify-content-between">
+                    <div class="left-head">
+                        <h1 class="fs-2 fw-bold text-black mb-5">Cart Shop</h1>
+                       <div class="kk">
+                        <p class="text-main fw-bold">Total Cart Price : {{cartData.totalCartPrice | currency : 'GBP'}}</p>
+                        
+                       </div>
+                    </div>
+                   @if(cartData.products.length){ <button (click)="clearCartItems()" class="btn border-2 border-success h-50 mt-3 fw-bold">Clear your Cart</button>}
+                </div>
+                @for (item of cartData.products; track item.product._id) 
+                {
+                    <div class="row border-bottom border-2 align-items-center p-2">
+                        <div class="col-md-2">
+                            <div class="item-img">
+                                <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+                            </div>
+                        </div>
+        
+                        <div class="col-md-8 my-auto">
+                            <div class="item-details d-flex flex-column justify-content-center">
+                                <p class="fs-5 fw-semibold">{{item.product.title}}</p>
+                                <p class="text-main fw-bold">{{item.price | currency : 'GBP'}}</p>
+                                 <span (click)="removeItemFromCart(item.product._id)" class="fw-bold text-danger small cursor-pointer"><i  class="fa-solid fa-trash-can me-1 "></i>Remove</span>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-2">
+                            <div class="item-quantity d-flex justify-content-between align-items-center text-main ">
+                               <i (click)="updateQuantity(item.product._id, item.count + 1)" class="fa-solid fa-circle-plus fs-4 cursor-pointer ms-lg-5 "></i>
+                               <span class="fs-5 fw-bold ">{{item.count}}</span>
+                               @if (item.count > 1) {
+                                <i (click)="updateQuantity(item.product._id, item.count - 1)" class="fa-solid fa-circle-minus fs-4 cursor-pointer"></i>
+                               }
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if(cartData.products.length){ 
+                    <div class="payment-method  mx-auto bg-main-light my-5 shadow py-3">
+                        <h2 class="fs-3 fw-bold text-center text-main">checkout</h2>
+
+                        <div class="payment-buttons d-flex my-3 ">
+                            <button [routerLink]="['/checkout',cartData._id]" class="left btn-main   d-block  fw-bold   text-white">Online Payement</button>
+                            <button [routerLink]="['/checkoutcash',cartData._id]" class=" right btn-main   d-block fw-bold    text-white">Cash Payement</button>
+                        </div>
+                    </div>
+                    
+                }
+            </div>
+            
+        </div>
+    
+    </section>
+}

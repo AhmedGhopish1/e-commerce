@@ -1,0 +1,11 @@
+.background-err{
+    background-color: #F8D7DA;
+}
+button:hover{
+    background-color: #198754;
+    color: white;
+    transition: 0.3s;
+}
+button{
+    color: #198754;
+}

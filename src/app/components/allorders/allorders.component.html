@@ -1,0 +1,60 @@
+
+    <section class="mt-5 pt-4">
+
+        <div class="w-75 mx-auto bg-main-light my-5 shadow p-2 ps-3 ">
+            <h1 class="text-center fw-bold text-main">ALL ORDERS </h1>
+            <div class="head d-flex justify-content-between">
+                <div class="left-head">
+                
+            </div>
+    
+            <div class="container">
+               @for (order of getAllOrders; track $index) 
+                { 
+                    
+                    <div class="row border-bottom border-2 align-items-center mt-3 gy-3">
+                        <p class="fw-bold mt-5 fs-6"><span class="fs-4 fw-bold">created At : </span> {{order.createdAt | date}}:</p>
+                        <p class="fs-4 fw-bold fs-6"><span class="text-main">payment Method Type: </span> {{order.paymentMethodType}}</p>
+                        @for (item of order.cartItems; track $index) {
+                            <div class="col-md-2 ">
+                                <div class="item-img" >
+                                    <img [src]="item.product.imageCover" class="w-100" alt="">
+
+                                    
+                                </div>
+                                
+                            </div>
+
+                            <div class=" col-md-4">
+                                <div class="dd">
+                                    <p class="fw-bold fs-5">brand: {{item.product.brand.name}}</p>                                    <!-- <p class="fw-bold fs-5">category: {{item.product.category.name}}</p> -->
+ 
+                                </div>
+
+                            </div>
+                            <div class="col-md-2 p-2">
+                                <div class="dd">
+                                    <p class="fw-bold fs-5">count: <span class="fs-6">{{item.count}}</span></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="dd">
+                                    <p class="fw-bold fs-5">price: <span class="small">{{item.price | currency : 'GBP'}}</span></p>
+                                    
+                                </div>
+
+                            </div>
+                        }
+
+                        <p class="fs-4 fw-bold mt-3"><span class="text-main">total price: </span>{{order.totalOrderPrice | currency : 'GBP'}}</p>
+   
+                    </div>
+                 } 
+                
+            </div>
+            
+          </div>
+        </div>
+    
+    </section>
