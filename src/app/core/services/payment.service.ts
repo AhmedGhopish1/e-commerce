@@ -9,12 +9,15 @@ import { environment } from '../environment/environment';
 export class PaymentService {
 
   constructor(private _HttpClient:HttpClient) { }
-  // clientToken:any={token : sessionStorage.getItem('token')};
+   clientToken:any={token : sessionStorage.getItem('token')};
 
   checkOutSession(cart_id:string | null ,paymentFormObject:object):Observable<any>{
 
     return this._HttpClient.post(`${environment.baseUrl}/api/v1/orders/checkout-session/${cart_id}?url=${environment.url}`,
       {"shippingAddress":paymentFormObject},
+      {
+        headers:this.clientToken
+      }
       
     )
 
